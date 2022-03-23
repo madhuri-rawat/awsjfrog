@@ -1,0 +1,40 @@
+version: 0.2
+
+phases:
+ env:
+  parameter-store:
+    ARTIFACTORY_API_KEY: "JFRPG_API"
+  install:
+     commands:
+      - echo Entering install phase...
+      - wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz 
+      - tar xzvf apache-maven-3.8.5-bin.tar.gz -C /opt/
+      - export PATH=/opt/apache-maven-3.8.5/bin:$PATH
+      - wget https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.14.0/jfrog-cli-linux-amd64/jf
+      - chmod +x jf
+  pre_build:
+    commands:
+     
+      - echo Entering pre_build phase...
+      - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
+      - sed -i -e 's|ARTIFACTORY_USER|${ARTIFACTORY_USER}|g' settings.xml && sed -i -e 's|ARTIFACTORY_PASSWORD|${ARTIFACTORY_API_KEY}|g' settings.xml && sed -i -e 's|ARTIFACTORY_MVN_REPO|${ARTIFACTORY_MVN_REPO}|g' settings.xml
+  build:
+    commands:
+      - echo Entering build phase...
+      - echo Build started on `date`
+      - mvn -s settings.xml -f pom.xml compile
+      - mvn -s settings.xml -f pom.xml package
+  post_build:
+    commands:
+      - echo Entering post_build phase...
+      - echo Build completed on `date`i
+      - ./jfrog rt u "*.war" libs-release-local --build-name=awslab1 --build-number=$CODEBUILD_BUILD_ID --flat=false
+      - ./jfrog rt bce awslab1 $CODEBUILD_BUILD_ID
+      - ./jfrog rt bp awslab1 $CODEBUILD_BUILD_ID
+artifacts:
+  type: zip
+  files:
+    - 'appspec.yml'
+    - 'scripts/start_server'
+    - 'scripts/install_dependencies'
+    - 'target/ROOT.war'
