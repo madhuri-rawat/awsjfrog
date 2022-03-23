@@ -9,13 +9,13 @@ phases:
       - wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz 
       - tar xzvf apache-maven-3.8.5-bin.tar.gz -C /opt/
       - export PATH=/opt/apache-maven-3.8.5/bin:$PATH
-      - wget https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.14.0/jfrog-cli-linux-amd64/jf
-      - chmod +x jf
+      - wget https://releases.jfrog.io/artifactory/jfrog-cli/v2/2.14.0/jfrog-cli-linux-amd64/jfrog
+      - chmod +x jfrog
   pre_build:
     commands:
      
       - echo Entering pre_build phase...
-      - ./jf rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
+      - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
       - sed -i -e 's|ARTIFACTORY_USER|${ARTIFACTORY_USER}|g' settings.xml && sed -i -e 's|ARTIFACTORY_PASSWORD|${ARTIFACTORY_API_KEY}|g' settings.xml && sed -i -e 's|ARTIFACTORY_MVN_REPO|${ARTIFACTORY_MVN_REPO}|g' settings.xml
   build:
     commands:
