@@ -1,9 +1,8 @@
 version: 0.2
-
-phases:
  env:
   parameter-store:
     ARTIFACTORY_API_KEY: "JFRPG_API"
+phases:
   install:
      commands:
       - echo Entering install phase...
