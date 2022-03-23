@@ -1,5 +1,5 @@
 version: 0.2
- env:
+env:
   parameter-store:
     ARTIFACTORY_API_KEY: "JFRPG_API"
 phases:
