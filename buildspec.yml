@@ -15,6 +15,7 @@ phases:
       - echo "enabled=1" >> jfrog-cli.repo;
       - yum-config-manager --add-repo https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key
       - yum repolist all
+      - cat jfrog-cli.repo
       - yum install -y jfrog-cli-v2-jf
   pre_build:
     commands:
