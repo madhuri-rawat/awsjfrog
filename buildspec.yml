@@ -13,7 +13,9 @@ phases:
       - echo "name=jfrog-cli" >> jfrog-cli.repo;
       - echo "baseurl=https://releases.jfrog.io/artifactory/jfrog-rpms" >> jfrog-cli.repo;
       - echo "enabled=1" >> jfrog-cli.repo;
-      - rpm --import https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key
+      - wget https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key
+      - (cat jfrog_public_gpg.key; echo) > gpg_fixed.key
+      - rpm --import gpg_fixed.key
       - mv jfrog-cli.repo /etc/yum.repos.d/;
       - yum install -y jfrog-cli-v2-jf;
       
