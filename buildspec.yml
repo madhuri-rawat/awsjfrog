@@ -17,6 +17,7 @@ phases:
       - (cat jfrog_public_gpg.key; echo) > gpg_fixed.key
       - rpm --import gpg_fixed.key
       - mv jfrog-cli.repo /etc/yum.repos.d/;
+      - yum list updates -d3
       - yum install -y jfrog-cli-v2-jf;
       
   pre_build:
