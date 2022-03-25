@@ -9,8 +9,13 @@ phases:
       - wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz 
       - tar xzvf apache-maven-3.8.5-bin.tar.gz -C /opt/
       - export PATH=/opt/apache-maven-3.8.5/bin:$PATH
-      - wget https://releases.jfrog.io/artifactory/jfrog-cli/v2/2.14.0/jfrog-cli-linux-amd64/jfrog
-      - chmod +x jfrog
+      - echo "[jfrog-cli]" > jfrog-cli.repo;
+      - echo "name=jfrog-cli" >> jfrog-cli.repo;
+      - echo "baseurl=https://releases.jfrog.io/artifactory/jfrog-rpms" >> jfrog-cli.repo;
+      - echo "enabled=1" >> jfrog-cli.repo;
+      - rpm --import https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key
+      - sudo mv jfrog-cli.repo /etc/yum.repos.d/;
+      - yum install -y jfrog-cli-v2-jf
   pre_build:
     commands:
      
