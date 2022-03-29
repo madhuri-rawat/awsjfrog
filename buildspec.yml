@@ -30,6 +30,7 @@ phases:
     commands:
       - echo Entering build phase...
       - echo Build started on `date`
+      - mvn install
       - mvn -s setting.xml -f pom.xml compile
       - mvn -s setting.xml -f pom.xml package
   post_build:
