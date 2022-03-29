@@ -30,16 +30,16 @@ phases:
     commands:
       - echo Entering build phase...
       - echo Build started on `date`
-      #- mvn -s setting.xml -f pom.xml compile
-      - mvn -f setting.xml compile
-      - mvn -f setting.xml package
+      - mvn -s setting.xml -f pom.xml compile
+      - mvn -s setting.xml -f pom.xml package 
+     
   post_build:
     commands:
       - echo Entering post_build phase...
       - echo Build completed on `date`i
       - jf rt u "*.war" libs-release-local --build-name=awslab1 --build-number=$CODEBUILD_BUILD_ID --flat=false
-      - jfrog rt bce awslab1 $CODEBUILD_BUILD_ID
-      - jfrog rt bp awslab1 $CODEBUILD_BUILD_ID
+      - jf rt bce awslab1 $CODEBUILD_BUILD_ID
+      - jf rt bp awslab1 $CODEBUILD_BUILD_ID
 artifacts:
   type: zip
   files:
