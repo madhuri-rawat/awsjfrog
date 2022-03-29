@@ -25,13 +25,13 @@ phases:
         # - jf config add --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
         - jf config add awsjfrog --interactive=false --url $ARTIFACTORY_URL 
         - jf config add awsjfrog --access-token $ARTIFACTORY_API_KEY --interactive=false
-        - sed -i -e 's|ARTIFACTORY_USER|${ARTIFACTORY_USER}|g' settings.xml && sed -i -e 's|ARTIFACTORY_PASSWORD|${ARTIFACTORY_API_KEY}|g' settings.xml && sed -i -e 's|ARTIFACTORY_MVN_REPO|${ARTIFACTORY_MVN_REPO}|g' settings.xml
+        - sed -i -e 's|ARTIFACTORY_USER|${ARTIFACTORY_USER}|g' setting.xml && sed -i -e 's|ARTIFACTORY_PASSWORD|${ARTIFACTORY_API_KEY}|g' setting.xml && sed -i -e 's|ARTIFACTORY_MVN_REPO|${ARTIFACTORY_MVN_REPO}|g' setting.xml
   build:
     commands:
       - echo Entering build phase...
       - echo Build started on `date`
-      - mvn -s settings.xml -f pom.xml compile
-      - mvn -s settings.xml -f pom.xml package
+      - mvn -s setting.xml -f pom.xml compile
+      - mvn -s setting.xml -f pom.xml package
   post_build:
     commands:
       - echo Entering post_build phase...
