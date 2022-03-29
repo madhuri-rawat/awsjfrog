@@ -37,9 +37,9 @@ phases:
     commands:
       - echo Entering post_build phase...
       - echo Build completed on `date`i
-      - ./jfrog rt u "*.war" libs-release-local --build-name=awslab1 --build-number=$CODEBUILD_BUILD_ID --flat=false
-      - ./jfrog rt bce awslab1 $CODEBUILD_BUILD_ID
-      - ./jfrog rt bp awslab1 $CODEBUILD_BUILD_ID
+      - jf rt u "*.war" libs-release-local --build-name=awslab1 --build-number=$CODEBUILD_BUILD_ID --flat=false
+      - jfrog rt bce awslab1 $CODEBUILD_BUILD_ID
+      - jfrog rt bp awslab1 $CODEBUILD_BUILD_ID
 artifacts:
   type: zip
   files:
