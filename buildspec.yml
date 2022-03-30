@@ -1,7 +1,7 @@
 version: 0.2
 env:
   parameter-store:
-    ARTIFACTORY_API_KEY: ${{JFRPG_API}}
+    ARTIFACTORY_API_KEY: JFRPG_API
 phases:
   install:
      commands:
@@ -17,9 +17,9 @@ phases:
       
   pre_build:
      env:
-      ARTIFACTORY_URL:'https://testgl.jfrog.io/ui/repos/tree/General/'
-      ARTIFACTORY_USER:'madhuric132@gmail.com'
-      ARTIFACTORY_MVN_REPO:'https://testgl.jfrog.io/ui/repos/tree/General/default-maven-virtual'
+      ARTIFACTORY_URL: 'https://testgl.jfrog.io/ui/repos/tree/General/'
+      ARTIFACTORY_USER: 'madhuric132@gmail.com'
+      ARTIFACTORY_MVN_REPO: 'https://testgl.jfrog.io/ui/repos/tree/General/default-maven-virtual'
      commands:
         - echo Entering pre_build phase...
         - echo $ARTIFACTORY_API_KEY
