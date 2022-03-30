@@ -17,12 +17,13 @@ phases:
       
   pre_build:
      env:
-      ARTIFACTORY_URL: "https://testgl.jfrog.io/ui/repos/tree/General/"
-      ARTIFACTORY_USER: "madhuric132@gmail.com"
-      ARTIFACTORY_MVN_REPO: "https://testgl.jfrog.io/ui/repos/tree/General/default-maven-virtual"
+      ARTIFACTORY_URL: 'https://testgl.jfrog.io/ui/repos/tree/General/'
+      ARTIFACTORY_USER: 'madhuric132@gmail.com'
+      ARTIFACTORY_MVN_REPO: 'https://testgl.jfrog.io/ui/repos/tree/General/default-maven-virtual'
      commands:
         - echo Entering pre_build phase...
         - echo $ARTIFACTORY_API_KEY
+        - echo $ARTIFACTORY_URL
         # - jf config add --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
         - jf config add --interactive=false --url $ARTIFACTORY_URL 
         - jf c show
