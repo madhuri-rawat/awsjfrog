@@ -23,14 +23,14 @@ phases:
       
      commands:
         - echo Entering pre_build phase...
-        - echo ${ARTIFACTORY_API_KEY}
+        - echo $ARTIFACTORY_API_KEY
         - echo $ARTIFACTORY_URL
-        # - jf config add --url $ARTIFACTORY_URL --user ${ARTIFACTORY_USER} --apikey ${ARTIFACTORY_API_KEY}
+        # - jf config add --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY
         - jf config add --interactive=false --url $ARTIFACTORY_URL
+        - jf config add --access-token $ARTIFACTORY_API_KEY --interactive=false
         - jf c show
-        - jf config add --access-token ${ARTIFACTORY_API_KEY} --interactive=false
         - sed -i -e 's|ARTIFACTORY_USER|${ARTIFACTORY_USER}|g' setting.xml && sed -i -e 's|ARTIFACTORY_PASSWORD|${ARTIFACTORY_API_KEY}|g' setting.xml && sed -i -e 's|ARTIFACTORY_MVN_REPO|${ARTIFACTORY_MVN_REPO}|g' setting.xml
-  build:
+  build: 
     commands:
       - echo Entering build phase...
       - echo Build started on `date`
